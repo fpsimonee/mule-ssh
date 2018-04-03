@@ -91,8 +91,14 @@ EXPOSE 1099
 # Jolokia port.
 EXPOSE 8899
 
+# supervisor base configuration
+ADD ./conf/supervisor.conf /etc/supervisor.conf
+
 # Default when starting the container is to start Mule ESB.
-CMD ["/bin/bash" , "/usr/local/bin/start_services.sh", "dsv", "/opt/start-mule.sh"]
+#CMD ["/bin/bash" , "/usr/local/bin/start_services.sh", "dsv", "/opt/start-mule.sh"]
+# default command
+CMD ["supervisord", "-c", "/etc/supervisor.conf", "dsv"]
+
 
 # Define mount points.
 VOLUME ["${MULE_HOME}/logs", "${MULE_HOME}/conf", "${MULE_HOME}/apps", "${MULE_HOME}/domains"]
