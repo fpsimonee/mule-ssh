@@ -97,7 +97,7 @@ ADD ./conf/supervisor.conf /etc/supervisor.conf
 # Default when starting the container is to start Mule ESB.
 #CMD ["/bin/bash" , "/usr/local/bin/start_services.sh", "dsv", "/opt/start-mule.sh"]
 # default command
-CMD ["supervisord", "-c", "/etc/supervisor.conf", "dsv"]
+CMD ["supervisord", "-c", "/etc/supervisor.conf"]
 
 
 # Define mount points.
