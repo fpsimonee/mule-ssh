@@ -66,6 +66,8 @@ RUN chmod +x ${INSTALLATION_PARENT}/start-mule.sh && \
     chmod 600 ${MULE_HOME}/conf/jmx.password
 
     # ssh install
+# script de inicialização dos serviços
+COPY ./scripts/all_comands.sh /usr/local/bin/all_comands.sh
 COPY ./scripts/start_services.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start_services.sh
 RUN apt-get update && apt-get install -y openssh-server
@@ -91,13 +93,10 @@ EXPOSE 1099
 # Jolokia port.
 EXPOSE 8899
 
-# supervisor base configuration
-ADD ./conf/supervisor.conf /etc/supervisor.conf
-
 # Default when starting the container is to start Mule ESB.
 #CMD ["/bin/bash" , "/usr/local/bin/start_services.sh", "dsv", "/opt/start-mule.sh"]
 # default command
-CMD ["supervisord", "-c", "/etc/supervisor.conf"]
+CMD ["/usr/local/bin/all_comands.sh", "dsv"]
 
 
 # Define mount points.
