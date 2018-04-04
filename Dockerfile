@@ -93,11 +93,12 @@ EXPOSE 1099
 # Jolokia port.
 EXPOSE 8899
 
+USER root
 # Default when starting the container is to start Mule ESB.
 #CMD ["/bin/bash" , "/usr/local/bin/start_services.sh", "dsv", "/opt/start-mule.sh"]
 # default command
-CMD ["/usr/local/bin/all_comands.sh", "dsv"]
-
+#CMD ["sudo /usr/local/bin/all_comands.sh", "dsv"]
+CMD [ "/opt/start-mule.sh", "/usr/local/bin/start_services.sh", "dsv"]
 
 # Define mount points.
 VOLUME ["${MULE_HOME}/logs", "${MULE_HOME}/conf", "${MULE_HOME}/apps", "${MULE_HOME}/domains"]
